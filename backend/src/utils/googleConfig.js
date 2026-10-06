@@ -1,9 +1,11 @@
-import { google } from 'googleapis'
+import { google } from "googleapis";
+import 'dotenv/config'
 
-const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    process.env.GOOGLE_REDIRECT_URI
-)
+const config = process.env
 
-export { oauth2Client }
+
+export const oauth2Client = new google.auth.OAuth2(
+    config.GOOGLE_CLIENT_ID,
+    config.GOOGLE_CLIENT_SECRET,
+    "postmessage"
+);
