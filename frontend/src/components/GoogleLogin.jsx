@@ -1,14 +1,37 @@
 import { useGoogleLogin } from '@react-oauth/google';
 import { googleAuth } from '../api/api';
+import { useNavigate } from 'react-router';
 
 
 const GoogleLogin = () => {
+    const navigate = useNavigate();
     const responseGoogle = async (authResult) => {
         try {
-            if (authResult?.code) {
-                const response = await googleAuth(authResult.code);
-                console.log(response.data);
-            }
+        if (authResult["code"]) {
+
+    const result = await googleAuth(authResult.code);
+
+    const { email, name, image } = result.data.user;
+
+    const token = result.data.accessToken;
+
+    const obj = {
+        email,
+        name,
+        token,
+        image
+    };
+
+    localStorage.setItem('user-info', JSON.stringify(obj));
+    navigate('/dashboard');
+
+} else {
+
+    console.log(authResult);
+
+    throw new Error(authResult);
+
+}
         } catch (err) {
             console.log(err)
         }
