@@ -1,11 +1,10 @@
-import Router from 'express'
-import { testAuth ,googleLogin } from '../controllers/auth.controller.js'
+import { Router } from 'express'
+import { googleLogin } from '../controllers/auth.controller.js'
 
 
 const router = Router()
 
-router.get('/test',testAuth )
 
-router.post('/google',googleLogin)
+router.get('/google', googleLogin)
 
 export default router
