@@ -1,10 +1,14 @@
 import { useGoogleLogin } from '@react-oauth/google';
+import { googleAuth } from '../api/api';
 
 
 const GoogleLogin = () => {
     const responseGoogle = async (authResult) => {
         try {
-            console.log(authResult)
+            if (authResult?.code) {
+                const response = await googleAuth(authResult.code);
+                console.log(response.data);
+            }
         } catch (err) {
             console.log(err)
         }
